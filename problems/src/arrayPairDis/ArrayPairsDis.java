@@ -1,9 +1,6 @@
 package arrayPairDis;
 
 import java.util.HashMap;
-import java.util.Map;
-import java.util.Iterator;
-import java.util.Set;
 
 /**
  * @author laplace
@@ -12,26 +9,40 @@ import java.util.Set;
  */
 public class ArrayPairsDis {
 	
-	int[] array = {1,7,5,9,2,12,3};
-	int k = 2;
-	HashMap<Integer,Integer> hashM = null;
+	private static final int[] array = {1,7,5,9,2,12,3};
+	private final static int k = 2;
+	private static int count;
+	private static HashMap<Integer,Integer> hashM = new HashMap<>();
 	
 	/**
 	 * Creates a hash map from array where keys are a element minus k.
+	 * Runtime of O(n) where in is the number of elements in the array.
 	 * @param array
 	 */
-	private void createHash( int[] array ) {
+	private static void createHash( ) {
 		for ( int i : array ) {
 			int key = i-k;
 			hashM.put(key, i);
 		}
 	}
 	
-	
+	/**
+	 * Counts the pairs with distance k.  
+	 * Runtime again is O(n)
+	 */
+	private static void countPairs() {
+		for ( int i : array ) {
+			if ( hashM.containsKey(i) ) {
+				count+=1;
+			}
+		}
+	}
 	
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-
+		createHash(); // O(n)
+		countPairs(); // O(n)
+		// total runtime of O(n) + O(n) = O(n)
+		System.out.print(count);
 	}
 
 }
